@@ -21,17 +21,19 @@
               </div>
               <div class='contact_main_container'>
                 <div class="contact_left">
+                  <form action="" method="POST">
+                  {% csrf_token %}
                   <h2 id="contact">Bizə məktub yaz</h2>
                   <div class="name_phone">
-                    <input type="text" ' placeholder='Ad və Soyad' />
-                    <input type="text" placeholder='Nömrə ' />
+                    {{form.name}}
+                    {{form.phone}}
                   </div>
                   <div class="name_phone">
-                    <input type="email" placeholder='E-poçt' />
-                    <input type="text" placeholder='Məzmun' />
+                    {{form.email}}
                   </div>
-                  <input class='message_inp' type="text" placeholder='Mesaj ' />
-                  <button class='send_msg_btn'>Göndər</button>
+                  {{form.message}}
+                  <input type="submit" value="Göndər" class='send_msg_btn'>
+                </form>
                 </div>
                 <div class="contact_right">
                   <h2>Bizimlə Əlaqə Saxlayin</h2>

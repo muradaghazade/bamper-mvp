@@ -23,7 +23,7 @@
     <h1 class="main-text">Mağazalar</h1>
     <div class="search-filters">
       <div class="search-magazines">
-        <input id="searchInput" type="text" placeholder="Mağaza axtarışı">
+        <input type="text" id="searchInput" oninput="filterContainers()" placeholder="Mağaza axtarışı">
         <img src="{% static 'images/[removal.ai]_c6a5aa8f-55e4-4c5c-b82e-77e988d1f735-screenshot-30.png' alt='' %}">
       </div>
       <div class="select-links">
@@ -66,6 +66,7 @@
 {% endblock %}
 
 {% block js%}
+<script src="{% static 'js/autopart-magazine-list.js' %}"></script>
   <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
   <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

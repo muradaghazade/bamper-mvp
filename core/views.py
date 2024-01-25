@@ -1,6 +1,6 @@
 from django.shortcuts import render
 import requests
-from core.forms import OrderForm
+from core.forms import OrderForm, ContactForm, IndexContactForm
 from django.shortcuts import redirect
 from django.http import HttpResponse
 from core.models import Store
@@ -8,7 +8,17 @@ from core.models import Store
 variables = ['Make', 'Model', 'Model Year', 'Series', 'Plant Country', 'Body Class', 'Transmission Style', 'Engine Number Of Cylinders', 'Displacement (L)', 'Fuel Type - Primary', 'Turbo', 'Other Restraint System Info', 'Front Air Bag Locations', 'Knee Air Bag Locations', 'Side Air Bag Locations']
 
 def home(request):
-    return render(request, 'index.html')
+    if request.method == "POST":
+        form = IndexContactForm(request.POST)
+        if form.is_valid():
+            order = form.save()
+            order.save()
+            return redirect('core:home')
+    else:
+        context = {
+            "form": IndexContactForm()
+        }
+    return render(request, 'index.html', context)
 
 
 def about(request):
@@ -31,6 +41,19 @@ def parts_select(request):
 
 def success(request):
     return render(request, 'success.html')
+
+def contact(request):
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            order = form.save()
+            order.save()
+            return redirect('core:home')
+    else:
+        context = {
+            "form": ContactForm()
+        }
+    return render(request, 'contact.html', context)
 
 def result(request):
     form = OrderForm()
