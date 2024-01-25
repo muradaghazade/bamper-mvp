@@ -1,3 +1,6 @@
 from django.contrib import admin
-
-# Register your models here.
+from core.models import *
+from django.contrib.auth.models import Group
+admin.site.register(Order)
+admin.site.register(Store)
+admin.site.unregister(Group)

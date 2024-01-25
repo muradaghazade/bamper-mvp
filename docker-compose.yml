@@ -1,37 +1,47 @@
-# Use postgres/example user/password credentials
-version: '3.1'
-
+version: "3.3"
+   
 services:
+    nginx-proxy:
+        image: jwilder/nginx-proxy
+        restart: "always"
+        ports:
+            - "80:80"
+        volumes:
+            - /var/run/docker.sock:/tmp/docker.sock:ro
+            - ./nginx/vhost/:/etc/nginx/vhost.d:ro
+            - ./nginx/conf.d/client_max_body_size.conf:/etc/nginx/conf.d/client_max_body_size.conf:ro
+            - ./static/:/coffeemood/static 
+            - ./media/:/coffeemood/media 
+    django:
+        build: .
+        restart: "always"
+        container_name: django
+        command: python manage.py runserver 0.0.0.0:8000
+        volumes:
+            - .:/usr/src/app/
+            - ./static/:/code/static
+            - ./media/:/code/media
+        ports:
+            - "8000:8000"
+        environment:
+            - DEBUG=1
+            - DJANGO_ALLOWED_HOSTS=coffeemood.az www.coffeemood.az 34.125.163.165 [::1]
+        depends_on:
+            - pgdb
+        env_file: ./.env
+    pgdb:
+        container_name: pgdb
+        image: postgres
+        ports: 
+            - 5432:5432
+        volumes: 
+            - ./postgre_db:/var/lib/postgresql/data
+        env_file: ./.env
+        
+# volumes:
+#     pgdata:
 
-  db:
-    image: postgres
-    restart: always
-    ports:
-      - 5432:5432
-    volumes:
-      - ./database:/var/lib/postgresql/data
-    environment:
-      POSTGRES_PASSWORD: 1234
-      POSTGRES_USER: root
-      POSTGRES_DB: bamper
-  
-  # web:
-  #   container_name: bamper
-  #   build: .
-  #   ports:
-  #     - 8000:8000
-  #   depends_on:
-  #     - "db"
-  #     - "redis"
-
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8081:8080
-
-  # redis:
-  #   image: redis
-  #   ports:
-  #     - 6379:6379
-      
+networks:
+  default:
+    external:
+      name: nginx-proxy

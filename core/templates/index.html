@@ -21,7 +21,7 @@
     <header>
       <div style="background-image: url({% static 'images/background1-removebg.png' %});" class="header_main">
           <nav id="navbar" class="navbar navbar-expand-lg navbar-dark container">
-            <a class="navbar-brand" href="#"><img src="./img/smallwhite.png" alt=""></a>
+            <a class="navbar-brand" href="{% url 'core:home' %}"><img src="{% static 'images/smallwhite.png' %}" alt=""></a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -29,19 +29,19 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
               <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                  <a class="nav-link" href="./index.html">Əsas <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="{% url 'core:home' %}">Əsas <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="./autopart-magazine-list-main/autopart-magazine-list.html">Mağazalar</a>
+                  <a class="nav-link" href="{% url 'core:magazine-list' %}">Mağazalar</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="./AutoPart-Contact-Page/contact.html">Əlaqə</a>
+                  <a class="nav-link" href="{% url 'core:contact' %}">Əlaqə</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="./aboutus.html">Haqqımızda</a>
+                  <a class="nav-link" href="{% url 'core:about' %}">Haqqımızda</a>
                 </li>
               </ul>
-              {% if user.is_authenticated %}
+              <!-- {% if user.is_authenticated %}
               <form class="form-inline my-2 my-lg-0">
                 <button id="btnProfile" class="btn btn-outline-success my-2 my-sm-0" ><a href="{% url 'accounts:profile' %}">Profil</a></button>
                 <button id="btnSignOut" class="btn btn-outline-success my-2 my-sm-0" ><a href="{% url 'accounts:logout' %}">Çıxış</a></button>
@@ -51,7 +51,7 @@
                 <button id="btnSignIn" class="btn btn-outline-success my-2 my-sm-0" ><a href="{% url 'accounts:login' %}">Daxil ol</a></button>
                 <button id="btnSignUp" class="btn btn-outline-success my-2 my-sm-0" ><a href="{% url 'accounts:register' %}">Qeydiyyat</a></button>
               </form>
-              {% endif %}
+              {% endif %} -->
             </div>
           </nav>
           <div class="header-inner" style="padding-top: 50px; padding-bottom: 50px;">
@@ -128,7 +128,7 @@
           <div style="margin-top: 35px;" class="row">
             <div class="col-md-4">
               <div class="vin-menu">
-                <img class="vin-menu-img" src="./img/vin-menu.png" alt="">
+                <img class="vin-menu-img" src="{% static 'images/vin-menu.png' %}" alt="">
               </div>
               <h3 class="vin-menu-h3">Avtomobilini təyin et</h3>
               <p class="vin-menu-p">Avtomobilinizi təyin etmək üçün VIN kodu daxil edin və ya Marka,Model və Buraxılış ilini əl ilə seçin.</p>
@@ -136,14 +136,14 @@
             </div>
             <div class="col-md-4">
               <div class="vin-menu">
-                <img class="vin-menu-img" src="./img/choose.png" alt="">
+                <img class="vin-menu-img" src="{% static 'images/choose.png' %}" alt="">
               </div>
               <h3 class="vin-menu-h3">Ehtiyat hissəsini seç </h3>
               <p class="vin-menu-p">Sizə lazım olan ehtiyat hissəsini seçin və sorğu yaradın.</p>
             </div>
             <div class="col-md-4">
               <div class="vin-menu-green">
-                <img class="check-img" src="./img/check.png" alt="">
+                <img class="check-img" src="{% static 'images/check.png' %}" alt="">
               </div>
               <h3 class="vin-menu-h3">Uyğun razılaşmanı et</h3>
               <p class="vin-menu-p">Fərqli satıcılardan təkliflər alın,ən uyğun seçimi edin,və razılaşma edin.</p>
@@ -198,7 +198,7 @@
                 <div class="col-auto">
                   <p class="pt-2">
                     <strong class="Follow">Follow us on :</strong>
-                    <a href=""><img style class="facebook-img" src="./img/instagram-white-icon.webp" (2).png alt=""></a>
+                    <a href=""><img style="background-color: black;" class="facebook-img" src="{% static 'images/instagram-white-icon.webp' %}" alt=""></a>
                   </p>
                  
                 </div>
